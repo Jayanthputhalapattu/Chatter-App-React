@@ -13,7 +13,11 @@ const App = () => {
     axios.get("https://u6o0u.sse.codesandbox.io/message").then((resp) => {
       setChat(resp.data);
     });
+    var x = window.innerHeight;
+    // console.log(x);
+    window.scrollTo(0, x);
   });
+
   return (
     <RespContext.Provider value={{ chat, setChat }}>
       <div className="App">
@@ -25,8 +29,8 @@ const App = () => {
             </ul>
           </div>
         ))}
+        <BottomBar />
       </div>
-      <BottomBar />
     </RespContext.Provider>
   );
 };
