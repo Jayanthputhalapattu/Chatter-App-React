@@ -9,11 +9,11 @@ import axios from "axios";
 const App = () => {
   const [chat, setChat] = useState([]);
 
-  useEffect(() => {
-    axios.get("https://u6o0u.sse.codesandbox.io/message").then((resp) => {
-      setChat(resp.data);
-    });
-  });
+  // useEffect(() => {
+  //   axios.get("https://u6o0u.sse.codesandbox.io/message").then((resp) => {
+  //     setChat(resp.data);
+  //   });
+  // });
   return (
     <RespContext.Provider value={{ chat, setChat }}>
       <div className="App">
@@ -25,8 +25,8 @@ const App = () => {
             </ul>
           </div>
         ))}
-        <BottomBar />
       </div>
+      <BottomBar />
     </RespContext.Provider>
   );
 };
