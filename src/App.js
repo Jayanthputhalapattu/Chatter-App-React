@@ -45,6 +45,19 @@ const App = () => {
                   }}
                 >
                   {res.content}
+                  <span
+                    style={{
+                      right: 20,
+                      color: "#D4EFDF",
+                      position: "absolute"
+                    }}
+                  >
+                    {new Date(res.createdAt)
+                      .toLocaleString(undefined, {
+                        timeZone: "Asia/Kolkata"
+                      })
+                      .substr(11)}
+                  </span>
                 </li>
               </div>
             ))}
