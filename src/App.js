@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { FaGoogle } from "react-icons/fa";
 import "bootstrap/dist/css/bootstrap.min.css";
 import BottomBar from "./BottomBar";
@@ -9,11 +9,13 @@ import { RespContext } from "./context/RespContext";
 import axios from "axios";
 import { Container, Row, Col, Button } from "reactstrap";
 import config from "./firebaseconfig";
+import Resp from "./Resp";
+import { CodeSharp } from "@material-ui/icons";
 var provider = new firebase.auth.GoogleAuthProvider();
 firebase.initializeApp(config);
 const App = () => {
   const [chat, setChat] = useState([]);
-
+  const [name, SetName] = useState("");
   useEffect(() => {
     axios.get("https://u6o0u.sse.codesandbox.io/message").then((resp) => {
       setChat(resp.data);
@@ -26,37 +28,34 @@ const App = () => {
       .auth()
       .signInWithPopup(provider)
       .then(function (result) {
-        // This gives you a Google Access Token. You can use it to access the Google API.
-        var token = result.credential.accessToken;
-        // The signed-in user info.
+        // var token = result.credential.accessToken;
         var user = result.user;
-        // ...
-        console.log(user);
-        console.log(token);
+        SetName(user.displayName);
       })
-      .catch(function (error) {
-        // Handle Errors here.
-        // var errorCode = error.code;
-        // var errorMessage = error.message;
-        // // The email of the user's account used.
-        // var email = error.email;
-        // // The firebase.auth.AuthCredential type that was used.
-        // var credential = error.credential;
-        // // ...
-      });
+      .catch(function (error) {});
   };
+
   return (
-    <RespContext.Provider value={{ chat, setChat }}>
+    <RespContext.Provider value={{ chat, setChat, name, SetName }}>
       <Container fluid>
         {/* <Resp /> */}
-        <Row>
-          <Button style={{}} onClick={firebaseAuth}>
-            <FaGoogle
-              style={{ paddingBottom: 2, paddingRight: 5, fontSize: 20 }}
-            />
-            SIGN IN WITH GOOGLE
-          </Button>
-        </Row>
+        {name === "" ? (
+          <>
+            <Row>
+              <Button style={{ background: "pink" }} onClick={firebaseAuth}>
+                <FaGoogle
+                  style={{ paddingBottom: 2, paddingRight: 5, fontSize: 20 }}
+                />
+                SIGN IN WITH GOOGLE
+              </Button>
+            </Row>
+          </>
+        ) : (
+          <>
+            <Resp />
+          </>
+        )}
+
         <Row>
           <Col style={{ marginTop: 15 }}>
             <BottomBar />
