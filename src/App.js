@@ -25,10 +25,10 @@ const App = () => {
     window.scrollTo(0, window.innerHeight);
   });
   useEffect(() => {
-    if (localStorage.getItem("name").length != 0) {
+    if (localStorage.getItem("name")) {
       SetName(localStorage.getItem("name"));
     }
-  });
+  }, []);
   const firebaseAuth = () => {
     firebase
       .auth()
