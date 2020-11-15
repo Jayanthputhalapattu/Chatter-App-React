@@ -10,6 +10,7 @@ const BottomBar = () => {
   });
   const handleSubmit = (e) => {
     e.preventDefault();
+
     axios
       .post("https://u6o0u.sse.codesandbox.io/message", {
         name: Resp.name,
@@ -23,22 +24,16 @@ const BottomBar = () => {
   return (
     <div>
       <form className="fort" onSubmit={handleSubmit}>
-        {/* <input
-          type="text"
-          placeholder="Your name"
-          onChange={(e) =>
-            setContent({ name: e.target.value, message: content.message })
-          }
-          value={content.name}
-          style={{ width: window.innerWidth / 2 }}
-        /> */}
         <input
           type="text"
           placeholder="Enter message to be sent ..."
           style={{ width: (3 * window.innerWidth) / 4 }}
           onChange={(e) => setContent({ message: e.target.value })}
           value={content.message}
+          // autoFocus
+          // onBlur={focus()}
         />
+
         <input
           type="submit"
           value="send"
@@ -50,7 +45,7 @@ const BottomBar = () => {
             outline: 0,
             color: "white",
             width: window.innerWidth / 4,
-            padding: "9px 0px 9px 0px"
+            padding: "11px 0px 9px 0px"
           }}
         />
       </form>
