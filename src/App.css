@@ -26,6 +26,7 @@ body {
   border: 0.5px solid black;
   border-radius: 2px;
   padding: 10px 10px 10px 22px;
+  outline: none;
 }
 .message-box {
   border: 1px solid #758aa2;

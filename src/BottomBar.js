@@ -35,11 +35,24 @@ const BottomBar = () => {
         <input
           type="text"
           placeholder="Enter message to be sent ..."
-          style={{ width: window.innerWidth / 2 }}
+          style={{ width: (3 * window.innerWidth) / 4 }}
           onChange={(e) => setContent({ message: e.target.value })}
           value={content.message}
         />
-        <input type="submit" value="send" style={{ display: "none" }} />
+        <input
+          type="submit"
+          value="send"
+          style={{
+            fontFamily: "Montserrat, sans-serif",
+            fontWeight: "bold",
+            backgroundColor: "blue",
+            border: "none",
+            outline: 0,
+            color: "white",
+            width: window.innerWidth / 4,
+            padding: "9px 0px 9px 0px"
+          }}
+        />
       </form>
     </div>
   );

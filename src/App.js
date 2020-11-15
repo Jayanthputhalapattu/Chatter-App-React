@@ -32,7 +32,9 @@ const App = () => {
         var user = result.user;
         SetName(user.displayName);
       })
-      .catch(function (error) {});
+      .catch(function (error) {
+        console.log(error);
+      });
   };
 
   return (
@@ -42,25 +44,35 @@ const App = () => {
         {name === "" ? (
           <>
             <Row>
-              <Button style={{ background: "pink" }} onClick={firebaseAuth}>
-                <FaGoogle
-                  style={{ paddingBottom: 2, paddingRight: 5, fontSize: 20 }}
-                />
-                SIGN IN WITH GOOGLE
-              </Button>
+              <Col>
+                <Button
+                  style={{
+                    backgroundColor: "blue",
+                    display: "block",
+                    margin: "auto",
+                    border: "none"
+                    // position: "absolute"
+                  }}
+                  onClick={firebaseAuth}
+                >
+                  <FaGoogle
+                    style={{ paddingBottom: 2, paddingRight: 5, fontSize: 20 }}
+                  />
+                  SIGN IN WITH GOOGLE
+                </Button>
+              </Col>
             </Row>
           </>
         ) : (
           <>
             <Resp />
+            <Row>
+              <Col style={{ marginTop: 15 }}>
+                <BottomBar />
+              </Col>
+            </Row>
           </>
         )}
-
-        <Row>
-          <Col style={{ marginTop: 15 }}>
-            <BottomBar />
-          </Col>
-        </Row>
       </Container>
       <div></div>
     </RespContext.Provider>
