@@ -24,21 +24,51 @@ const App = () => {
     });
     window.scrollTo(0, window.innerHeight);
   });
-  useEffect(() => {
-    if (localStorage.getItem("name")) {
-      SetName(localStorage.getItem("name"));
+  const setCookie = (cname, cvalue, exdays) => {
+    var d = new Date();
+    d.setTime(d.getTime() + exdays * 24 * 60 * 60 * 1000);
+    var expires = "expires=" + d.toUTCString();
+    document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
+  };
+  const getCookie = (cname) => {
+    var name = cname + "=";
+    var decodedCookie = decodeURIComponent(document.cookie);
+    var ca = decodedCookie.split(";");
+    for (var i = 0; i < ca.length; i++) {
+      var c = ca[i];
+      while (c.charAt(0) == " ") {
+        c = c.substring(1);
+      }
+      if (c.indexOf(name) == 0) {
+        return c.substring(name.length, c.length);
+      }
     }
-  }, []);
+    return "";
+  };
   const firebaseAuth = () => {
     firebase
       .auth()
       .signInWithPopup(provider)
       .then((result) => {
-        // Get the user's ID token as it is needed to exchange for a session cookie.
-        // var idToken = user.credential.accessToken;
         var user = result.user;
-        SetName(user.displayName);
-        localStorage.setItem("name", user.displayName);
+
+        var csrfToken = getCookie("csrfToken");
+        var idToken;
+        firebase
+          .auth()
+          .currentUser.getIdToken(true)
+          .then((resp) => {
+            console.log(resp);
+            idToken = resp;
+          });
+        axios.post(
+          "https://oc62v.sse.codesandbox.io/sessionLogin",
+          {
+            idToken: idToken,
+            csrfToken: csrfToken
+          },
+          { withCredentials: true }
+        );
       });
   };
 
