@@ -20,10 +20,10 @@ const App = () => {
     var ca = document.cookie.split(";");
     for (var i = 0; i < ca.length; i++) {
       var c = ca[i];
-      while (c.charAt(0) == " ") {
+      while (c.charAt(0) === " ") {
         c = c.substring(1);
       }
-      if (c.indexOf(name) == 0) {
+      if (c.indexOf(name) === 0) {
         return c.substring(name.length, c.length);
       }
     }
@@ -44,7 +44,7 @@ const App = () => {
       )
       .then((resp) => {
         console.log(resp.data.name);
-        if (resp.status == 200) {
+        if (resp.status === 200) {
           SetName(resp.data.name);
         }
         setLoading(false);
