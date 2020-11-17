@@ -31,11 +31,11 @@ const App = () => {
   }
   const [chat, setChat] = useState([]);
   const [name, SetName] = useState("");
-  const [loading, setLoaing] = useState(true);
+  const [loading, setLoading] = useState(true);
   useEffect(() => {
     axios
       .post(
-        "https://oc62v.sse.codesandbox.io/profile",
+        "https://festive-boyd-cdea89.netlify.app/.netlify/functions/server/backend/profile",
         { session: getCookie("session") },
         {
           headers: { "Access-Control-Allow-Origin": "*" },
@@ -45,11 +45,10 @@ const App = () => {
       .then((resp) => {
         console.log(resp.data.name);
         if (resp.status == 200) {
-          setLoaing(false);
           SetName(resp.data.name);
         }
+        setLoading(false);
       });
-    setLoaing(false);
   }, []);
 
   useEffect(() => {
@@ -81,7 +80,7 @@ const App = () => {
             axios(
               {
                 method: "post",
-                url: "https://oc62v.sse.codesandbox.io/sessionLogin",
+                url: "https://festive-boyd-cdea89.netlify.app/.netlify/functions/server/backend/sessionLogin",
                 data: { idToken: idToken },
                 headers: { "Access-Control-Allow-Origin": "*" }
               },
@@ -101,7 +100,7 @@ const App = () => {
           <p style={{ color: "white" }}>Loading....</p>
         ) : (
           <>
-            {name === "" ? (
+            {name === undefined ? (
               <>
                 <Row>
                   <Col>
