@@ -1,0 +1,2 @@
+body{background:#000;color:smokewhite}#chat,body{padding:16px}#chat{max-height:calc(100vh - 128px);overflow:scroll}.name{color:rgba(0,0,0,.54)}.content{margin-bottom:8px}.fort{left:0;bottom:0;position:fixed}.fort input[type=text]{border:.5px solid #000;border-radius:2px;padding:10px 10px 10px 22px;outline:none}.message-box{border:1px solid #758aa2;width:100%;border-radius:5px;margin:10px;background-color:#758aa2;overflow:hidden;white-space:normal}
+/*# sourceMappingURL=main.dffa43f1.chunk.css.map */
