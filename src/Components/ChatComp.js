@@ -2,7 +2,6 @@ import axios from "axios";
 import React,{useContext,useState,useEffect} from "react"
 import firebase from "firebase/app";
 import "firebase/auth";
-
 import BottomBar from "../Components/BottomBar";
 import { FaGoogle } from "react-icons/fa";
 import { RespContext } from "../context/RespContext";
@@ -43,16 +42,12 @@ const ChatComp = ()=>{
             }
             setLoading(false);
           });
-      }, []);
-    
-      useEffect(() => {
-        // if(Respo.name!=="){
-        axios.get("https://u6o0u.sse.codesandbox.io/message").then((resp) => {
-        Respo.setChat(resp.data);
         });
-        window.scrollTo(0, window.innerHeight);
-      });
-    
+      useEffect(() => {
+        axios.get("https://festive-boyd-cdea89.netlify.app/.netlify/functions/server/message").then((resp) => {
+        Respo.setChat(resp.data);
+       });
+      },Resp.chat)
       function setCookie(cname, cvalue, exdays) {
         var d = new Date();
         d.setTime(d.getTime() + exdays * 24 * 60 * 60 * 1000);
@@ -68,7 +63,6 @@ const ChatComp = ()=>{
           .then((result) => {
             var user = result.user;
             Respo.SetName(user.displayName);
-    
             firebase
               .auth()
               .currentUser.getIdToken(true)
@@ -104,7 +98,6 @@ const ChatComp = ()=>{
                     display: "block",
                     margin: "auto",
                     border: "none"
-                    // position: "absolute"
                   }}
                   onClick={firebaseAuth}
                 >
@@ -133,9 +126,7 @@ const ChatComp = ()=>{
       </>
     )}
   </Container>
- 
    )
-   
 }
 
 export default ChatComp

@@ -3,7 +3,6 @@ import { Container, Row } from "reactstrap";
 import { RespContext } from "./context/RespContext";
 const Resp = () => {
   const Resp = useContext(RespContext);
-  // console.log(Resp.chat.firebase);
   return (
     <Container className="App" fluid>
       <Row id="msg">
