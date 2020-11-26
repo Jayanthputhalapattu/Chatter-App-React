@@ -17,7 +17,7 @@ const BottomBar = () => {
         content: content.message
       })
       .then((resp) => {
-        Resp.setChat([...Resp.chat, resp.data]);
+        Resp.setChat([...Resp.chat, resp.data ]);
       });
       window.scrollTo(0,window.innerHeight)
     setContent({ message: "" });
