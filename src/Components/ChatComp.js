@@ -72,6 +72,7 @@ useEffect(() => {
         Respo.setChat(resp.data);
         
        });
+       window.scrollTo(0, window.innerHeight)
       })
       function setCookie(cname, cvalue, exdays) {
         var d = new Date();
