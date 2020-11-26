@@ -70,6 +70,7 @@ useEffect(() => {
       useEffect(() => {
         axios.get("https://festive-boyd-cdea89.netlify.app/.netlify/functions/server/message").then((resp) => {
         Respo.setChat(resp.data);
+        
        });
       })
       function setCookie(cname, cvalue, exdays) {
