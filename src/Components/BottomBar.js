@@ -12,7 +12,7 @@ const BottomBar = () => {
     e.preventDefault();
 
     axios
-      .post("https://u6o0u.sse.codesandbox.io/message", {
+      .post("https://festive-boyd-cdea89.netlify.app/.netlify/functions/server/message", {
         name: Resp.name,
         content: content.message
       })
