@@ -5,11 +5,52 @@ import "firebase/auth";
 import BottomBar from "../Components/BottomBar";
 import { FaGoogle } from "react-icons/fa";
 import { RespContext } from "../context/RespContext";
-import { Container, Row, Col, Button } from "reactstrap";
+import { Container, Row, Col, Button} from "reactstrap";
 import Resp from "../Resp";
+import {
+  Collapse,
+  Navbar,
+  NavbarToggler,
+  NavbarBrand,
+  Nav,
+  NavItem,
+  NavbarText
+} from 'reactstrap'
+import { Redirect } from "react-router-dom";
 const ChatComp = ()=>{
+
     const Respo = useContext(RespContext);
     const [loading,setLoading] = useState(true)
+    const [isOpen, setIsOpen] = useState(false);
+useEffect(() => {
+        axios
+          .post(
+            "https://festive-boyd-cdea89.netlify.app/.netlify/functions/server/backend/profile",
+            { session: getCookie("session") },
+            {
+              headers: { "Access-Control-Allow-Origin": "*" },
+              xhrField: { withCredentials: true }
+            }
+          )
+          .then((resp) => {
+            if (resp.status === 200) {
+              Respo.SetName(resp.data.name);
+            }
+            setLoading(false);
+          });
+          // eslint-disable-next-line
+        },[]);
+    function deleteAllCookies() {
+      var cookies = document.cookie.split(";");
+  
+      for (var i = 0; i < cookies.length; i++) {
+          var cookie = cookies[i];
+          var eqPos = cookie.indexOf("=");
+          var name = eqPos > -1 ? cookie.substr(0, eqPos) : cookie;
+          document.cookie = name + "=;expires=Thu, 01 Jan 1970 00:00:00 GMT";
+      }
+  }
+  const toggle = () => setIsOpen(!isOpen);
     function getCookie(cname) {
         var name = cname + "=";
         var ca = document.cookie.split(";");
@@ -25,24 +66,7 @@ const ChatComp = ()=>{
         return "";
       }
     
-      useEffect(() => {
-        axios
-          .post(
-            "https://festive-boyd-cdea89.netlify.app/.netlify/functions/server/backend/profile",
-            { session: getCookie("session") },
-            {
-              headers: { "Access-Control-Allow-Origin": "*" },
-              xhrField: { withCredentials: true }
-            }
-          )
-          .then((resp) => {
-            console.log(resp.data.name);
-            if (resp.status === 200) {
-              Respo.SetName(resp.data.name);
-            }
-            setLoading(false);
-          });
-        });
+      
       useEffect(() => {
         axios.get("https://festive-boyd-cdea89.netlify.app/.netlify/functions/server/message").then((resp) => {
         Respo.setChat(resp.data);
@@ -82,12 +106,34 @@ const ChatComp = ()=>{
               .catch((error) => console.log(error));
           });
       };
+      const handleLogout = ()=>{
+        
+        localStorage.clear();
+        deleteAllCookies()
+        Respo.SetName("")
+        return <Redirect to="/"/>
+      }
    return (
     <Container fluid>
+
     {loading ? (
       <p style={{ color: "white" }}>Loading....</p>
     ) : (
       <>
+      <Navbar color="light" light expand="md" style={{borderRadius:"8px 8px"}}>
+        
+        <NavbarBrand href="/"><img src="icon-192x192.png" height="30" alt="#"/>Gaggles Chat</NavbarBrand>
+        <NavbarToggler onClick={toggle} />
+        <Collapse isOpen={isOpen} navbar>
+          <Nav className="mr-auto" navbar>
+            <NavItem>
+              {/* A group chat Application */}
+            </NavItem>
+          </Nav>
+          <NavbarText>{Respo.name==="" || Respo.name===undefined?(<>HOLA!</>):(<><Button onClick={handleLogout}>Log out</Button></>)}</NavbarText>
+     
+        </Collapse>
+      </Navbar>
         {Respo.name === undefined || Respo.name==="" ? (
           <>
             <Row>
@@ -97,7 +143,9 @@ const ChatComp = ()=>{
                     backgroundColor: "blue",
                     display: "block",
                     margin: "auto",
-                    border: "none"
+                    border: "none",
+                    top:300,
+                    position:"relative"
                   }}
                   onClick={firebaseAuth}
                 >
