@@ -47,7 +47,7 @@ const ChatComp = ()=>{
         axios.get("https://festive-boyd-cdea89.netlify.app/.netlify/functions/server/message").then((resp) => {
         Respo.setChat(resp.data);
        });
-      },Resp.chat)
+      })
       function setCookie(cname, cvalue, exdays) {
         var d = new Date();
         d.setTime(d.getTime() + exdays * 24 * 60 * 60 * 1000);
