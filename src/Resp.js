@@ -1,12 +1,15 @@
 import React, { useContext} from "react";
 import { Container, Row } from "reactstrap";
 import { RespContext } from "./context/RespContext";
+import ScrollToBottom from "react-scroll-to-bottom"
 const Resp = () => {
   const Resp = useContext(RespContext);
   
   return (
+  
     <Container className="App" fluid>
       <Row className="msg" id ="mssg">
+      <ScrollToBottom>
         <ul style={{ listStyleType: "none" }}>
           {Resp.chat.map((res, index) => (
             <div className="message-box" id="msg" key={res._id}>
@@ -49,8 +52,10 @@ const Resp = () => {
             </div>
           ))}
         </ul>
+        </ScrollToBottom>
       </Row>
     </Container>
+
   );
 };
 export default Resp;
