@@ -4,13 +4,14 @@ import { RespContext } from "./context/RespContext";
 
 const Resp = () => {
   const Resp = useContext(RespContext);
-  
+
   return (
   
     <Container className="App" fluid>
       <Row className="msg" id ="mssg">
      
         <ul style={{ listStyleType: "none" }}>
+          
           {Resp.chat.map((res, index) => (
             
             <div className="message-box" id="msg" key={res._id}>

@@ -12,6 +12,7 @@
     "firebase": "8.0.2",
     "mater": "0.0.0",
     "mongoose": "5.10.13",
+    "pwafire": "^1.10.26",
     "react": "17.0.1",
     "react-dom": "17.0.1",
     "react-focus-lock": "2.4.1",

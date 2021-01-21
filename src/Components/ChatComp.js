@@ -7,6 +7,8 @@ import { FaGoogle } from "react-icons/fa";
 import { RespContext } from "../context/RespContext";
 import { Container, Row, Col, Button} from "reactstrap";
 import Resp from "../Resp";
+import pwafire from "pwafire";
+
 import {
   Collapse,
   Navbar,
@@ -18,10 +20,15 @@ import {
 } from 'reactstrap'
 import { Redirect } from "react-router-dom";
 const ChatComp = ()=>{
+  const pwa = pwafire.pwa;
+
 
     const Respo = useContext(RespContext);
     const [loading,setLoading] = useState(true)
     const [isOpen, setIsOpen] = useState(false);
+    
+  
+   
 useEffect(() => {
         axios
           .post(
@@ -50,6 +57,17 @@ useEffect(() => {
           document.cookie = name + "=;expires=Thu, 01 Jan 1970 00:00:00 GMT";
       }
   }
+  const HandleClick =()=>{
+    const props = ["name", "email", "tel"];
+    const options = { multiple: true };
+    pwa.Contacts(props, options).then(async(res) => {
+  // Do something with contacts...
+  const contacts =await( res.type === 'success' ? res.contacts : null);
+  console.log(contacts)
+  //...
+});
+  }
+  
   const toggle = () => setIsOpen(!isOpen);
     function getCookie(cname) {
         var name = cname + "=";
@@ -160,6 +178,7 @@ useEffect(() => {
                   />
                   SIGN IN WITH GOOGLE
                 </Button>
+                <button onClick={HandleClick}> Pick Contacts </button>
               </Col>
             </Row>
           </>
