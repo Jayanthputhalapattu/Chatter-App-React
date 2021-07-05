@@ -19,7 +19,6 @@ const BottomBar = () => {
       .then((resp) => {
         Resp.setChat([...Resp.chat, resp.data ]);
       });
-    
     setContent({ message: "" });
   };
   return (

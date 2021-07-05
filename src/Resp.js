@@ -1,14 +1,18 @@
 import React, { useContext} from "react";
 import { Container, Row } from "reactstrap";
 import { RespContext } from "./context/RespContext";
+
 const Resp = () => {
   const Resp = useContext(RespContext);
   
   return (
+  
     <Container className="App" fluid>
       <Row className="msg" id ="mssg">
+     
         <ul style={{ listStyleType: "none" }}>
           {Resp.chat.map((res, index) => (
+            
             <div className="message-box" id="msg" key={res._id}>
               <span
                 style={{
@@ -47,10 +51,13 @@ const Resp = () => {
                 {res.content}
               </li>
             </div>
+           
           ))}
         </ul>
+       
       </Row>
     </Container>
+
   );
 };
 export default Resp;

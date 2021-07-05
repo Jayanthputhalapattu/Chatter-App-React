@@ -69,10 +69,10 @@ useEffect(() => {
       
       useEffect(() => {
         axios.get("https://festive-boyd-cdea89.netlify.app/.netlify/functions/server/message").then((resp) => {
-        Respo.setChat(resp.data);
-        
+             Respo.setChat(resp.data)
+             
        });
-       window.scrollTo(0, window.innerHeight);
+        window.scrollTo(0, window.innerHeight)
       })
       function setCookie(cname, cvalue, exdays) {
         var d = new Date();
